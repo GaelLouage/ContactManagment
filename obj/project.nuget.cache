@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "gS/2pWLvUfMH9GpcyXL0TImC2iGGCqdm2u7N+7tQhok7tzt30jo5grTB0ZjhOV3IXdfg1z5Ty82etyyfvjkmBQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\louag\\source\\repos\\ContentManagment\\ContactManagementSystem\\ContactManagementSystem.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\louag\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "Id": "afb7f115-2b59-4acb-89b4-c05cdda07874",
+    "Name": "Tester2",
+    "Email": "test@hotmail.com",
+    "Phone": null
+  },
+  {
+    "Id": "22349885-227a-42af-8f5c-95ef049d852a",
+    "Name": "Tester3",
+    "Email": "test@hotmail.com",
+    "Phone": null
+  },
+  {
+    "Id": "fd5a9318-c651-4202-ad1a-c9b269e0fbdd",
+    "Name": "Tester2",
+    "Email": null,
+    "Phone": null
+  }
+]
