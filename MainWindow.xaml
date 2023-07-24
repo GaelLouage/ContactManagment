@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContactManagementSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ContactManagement" Height="450" Width="800">
     <Grid Loaded="Grid_Loaded">
-        
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="txtSearch" Grid.Row="0" Margin="10" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" TextChanged="txtSearch_TextChanged"/>
+        <ComboBox x:Name="cmbOrder" Grid.Column="1" Grid.Row="0" Margin="10" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" SelectionChanged="cmbOrder_SelectionChanged"/>
+        <ListView x:Name="lvContacts" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2" Margin="10" >
+            <!-- Define the columns for the ListView -->
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="200"/>
+                    <GridViewColumn Header="Phone Number" DisplayMemberBinding="{Binding Phone}" Width="150"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="200"/>
+                    <!-- Add more columns as needed for other contact details -->
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!-- Add buttons and other UI elements for adding, updating, deleting contacts, etc. -->
+        <Button x:Name="btnDelete" Content="Delete" Grid.Column="1" Grid.Row="5" Margin="10 10 10 10" Width="70" Height="40" HorizontalAlignment="Right" Click="btnDelete_Click"/>
     </Grid>
 </Window>

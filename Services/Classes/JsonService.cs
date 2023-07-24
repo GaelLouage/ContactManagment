@@ -38,7 +38,6 @@ namespace ContactManagementSystem.Services.Classes
                 }
             }
     }
-
     public async Task<List<T>> GetAllContactsAsync()
     {
         using (var fs = new StreamReader(_jsonFileName))

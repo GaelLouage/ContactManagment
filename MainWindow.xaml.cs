@@ -1,4 +1,5 @@
 ﻿using ContactManagementSystem.Entities;
+using ContactManagementSystem.Enums;
 using ContactManagementSystem.Services.Classes;
 using ContactManagementSystem.Services.Interfaces;
 using System;
@@ -24,7 +25,7 @@ namespace ContactManagementSystem
     public partial class MainWindow : Window
     {
         private readonly IJsonService<ContactEntity> _jsonService;
-
+        private List<ContactEntity> _contacts;
         public MainWindow(IJsonService<ContactEntity> jsonService)
         {
             _jsonService = jsonService;
@@ -34,28 +35,66 @@ namespace ContactManagementSystem
         {
             InitializeComponent();
 
-
-
         }
 
         private async void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            var toCreate = new ContactEntity()
+            _contacts = await _jsonService.GetAllContactsAsync();
+            lvContacts.ItemsSource = _contacts;
+            cmbOrder.ItemsSource = Enum.GetValues(typeof(OrderType)).Cast<OrderType>();
+        }
+
+        private async void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtSearch.Text))
             {
-                Id = Guid.NewGuid(),
-                Name = "Tester2",
-            };
-            try
+                var textAsLower = txtSearch.Text.ToLower();
+                lvContacts.DataContext = null;
+                lvContacts.ItemsSource = _contacts.Where(x => x.Name.Contains(textAsLower) ||
+                x.Phone.Contains(textAsLower) || x.Email.Contains(textAsLower));
+            }
+        }
+
+        private void lvContacts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void cmbOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbOrder.SelectedIndex >= 0)
             {
-                var obj = await _jsonService.CreateDataAsync(toCreate, toCreate.Name);
-                if (obj != null)
+                lvContacts.DataContext = null;           
+                var orderDictionary = new Dictionary<OrderType, Func<List<ContactEntity>>>()
                 {
-                    MessageBox.Show(obj.Name);
+                    {OrderType.Name, () => _contacts.OrderBy(x => x.Name).ToList() },
+                    {OrderType.Email, () =>  _contacts.OrderBy(x => x.Email).ToList() },
+                    {OrderType.Phone, () => _contacts.OrderBy(x => x.Phone).ToList() },
+                };
+                var orderType = (OrderType)cmbOrder.SelectedItem;
+                if (orderDictionary.TryGetValue(orderType, out var orderFunction))
+                {
+                    lvContacts.ItemsSource = orderFunction.Invoke();
                 }
             }
-            catch (Exception ex)
+        }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if(lvContacts.SelectedItems != null)
             {
-                MessageBox.Show(ex.Message);
+                var contact = lvContacts.SelectedValue as ContactEntity;
+                await _jsonService.DeleteDataAsync(contact.Id);
+                _contacts = await _jsonService.GetAllContactsAsync();
+                lvContacts.DataContext = null;
+                lvContacts.ItemsSource = _contacts;
+                if (_contacts.Contains(contact))
+                {
+                    MessageBox.Show("Failed to delete contact.");
+                } else
+                {
+                    MessageBox.Show("Succesfully removed contact.");
+                }
             }
         }
     }

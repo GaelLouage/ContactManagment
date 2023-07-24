@@ -56,9 +56,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\ContactAlreadyExistsException.cs" />
+    <Compile Include="Create.xaml.cs">
+      <DependentUpon>Create.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entities\ContactEntity.cs" />
+    <Compile Include="Enums\OrderType.cs" />
     <Compile Include="Services\Classes\JsonService.cs" />
     <Compile Include="Services\Interfaces\IJsonService.cs" />
+    <Compile Include="UpdateForm.xaml.cs">
+      <DependentUpon>UpdateForm.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Create.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,6 +82,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UpdateForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

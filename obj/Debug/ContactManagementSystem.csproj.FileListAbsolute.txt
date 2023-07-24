@@ -16,3 +16,7 @@ C:\Users\louag\source\repos\ContentManagment\ContactManagementSystem\obj\Debug\C
 C:\Users\louag\source\repos\ContentManagment\ContactManagementSystem\obj\Debug\ContactManagementSystem.csproj.CopyComplete
 C:\Users\louag\source\repos\ContentManagment\ContactManagementSystem\obj\Debug\ContactManagementSystem.exe
 C:\Users\louag\source\repos\ContentManagment\ContactManagementSystem\obj\Debug\ContactManagementSystem.pdb
+C:\Users\louag\source\repos\ContentManagment\ContactManagementSystem\obj\Debug\Create.g.cs
+C:\Users\louag\source\repos\ContentManagment\ContactManagementSystem\obj\Debug\UpdateForm.g.cs
+C:\Users\louag\source\repos\ContentManagment\ContactManagementSystem\obj\Debug\Create.baml
+C:\Users\louag\source\repos\ContentManagment\ContactManagementSystem\obj\Debug\UpdateForm.baml
