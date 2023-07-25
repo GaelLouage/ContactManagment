@@ -61,6 +61,8 @@
     </Compile>
     <Compile Include="Entities\ContactEntity.cs" />
     <Compile Include="Enums\OrderType.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\ValidateFieldsHelper.cs" />
     <Compile Include="Services\Classes\JsonService.cs" />
     <Compile Include="Services\Interfaces\IJsonService.cs" />
     <Compile Include="UpdateForm.xaml.cs">

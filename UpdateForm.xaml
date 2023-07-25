@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContactManagementSystem"
         mc:Ignorable="d"
-            Title="Update Contact" Height="250" Width="400">
+            Title="Update Contact" Height="250" Width="400" Loaded="Window_Loaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ContactManagementSystem.Entities;
+using ContactManagementSystem.Helpers;
+using ContactManagementSystem.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,19 +22,42 @@ namespace ContactManagementSystem
     /// </summary>
     public partial class Create : Window
     {
-        public Create()
+        private readonly IJsonService<ContactEntity> _jsonService;
+
+        public Create(IJsonService<ContactEntity> jsonService)
         {
+            _jsonService = jsonService;
             InitializeComponent();
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateFieldsHelper.ValidateContactFields(txtName, txtPhone, txtEmail))
+            {
+                return;
+            }
+
+            try
+            {
+                await _jsonService.CreateDataAsync(new ContactEntity { Name = txtName.Text, Phone = txtPhone.Text, Email = txtEmail.Text}, txtName.Text);
+                MessageBox.Show("Successfully created contact!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while creating the contact: " + ex.Message);
+            }
+        }
+
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            var mainForm = new MainWindow(_jsonService);
+            mainForm.Show();
+            this.Close();
         }
     }
 }

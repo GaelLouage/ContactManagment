@@ -35,6 +35,9 @@
             </ListView.View>
         </ListView>
         <!-- Add buttons and other UI elements for adding, updating, deleting contacts, etc. -->
+        <Button x:Name="btnCreate" Content="Create" Grid.Column="1" Grid.Row="5" Margin="10 10 10 10" Width="70" Height="40" HorizontalAlignment="Left" Click="btnCreate_Click"/>
+        <Button x:Name="btnUpdate" Content="Update" Grid.Column="1" Grid.Row="5" Margin="10 10 10 10" Width="70" Height="40" HorizontalAlignment="Center" Click="btnUpdate_Click"/>
         <Button x:Name="btnDelete" Content="Delete" Grid.Column="1" Grid.Row="5" Margin="10 10 10 10" Width="70" Height="40" HorizontalAlignment="Right" Click="btnDelete_Click"/>
+        
     </Grid>
 </Window>

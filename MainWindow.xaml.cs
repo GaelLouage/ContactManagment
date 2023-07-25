@@ -29,6 +29,7 @@ namespace ContactManagementSystem
         public MainWindow(IJsonService<ContactEntity> jsonService)
         {
             _jsonService = jsonService;
+            InitializeComponent();
         }
 
         public MainWindow() : this(new JsonService<ContactEntity>("contacts"))
@@ -44,14 +45,18 @@ namespace ContactManagementSystem
             cmbOrder.ItemsSource = Enum.GetValues(typeof(OrderType)).Cast<OrderType>();
         }
 
-        private async void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        private  void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(txtSearch.Text))
             {
-                var textAsLower = txtSearch.Text.ToLower();
+                var textAsLower = txtSearch.Text.ToLower().Replace(" ", "");
                 lvContacts.DataContext = null;
-                lvContacts.ItemsSource = _contacts.Where(x => x.Name.Contains(textAsLower) ||
-                x.Phone.Contains(textAsLower) || x.Email.Contains(textAsLower));
+                lvContacts.ItemsSource = _contacts.Where(x =>
+            x.Name.Replace(" ", "").ToLower().Contains(textAsLower) ||
+            x.Phone.Contains(textAsLower) || x.Email.Contains(textAsLower));
+            } else
+            {
+                lvContacts.ItemsSource = _contacts;
             }
         }
 
@@ -96,6 +101,25 @@ namespace ContactManagementSystem
                     MessageBox.Show("Succesfully removed contact.");
                 }
             }
+        }
+
+        private void btnCreate_Click(object sender, RoutedEventArgs e)
+        {
+            var updateForm = new Create(_jsonService);
+            updateForm.Show();
+            this.Hide();
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvContacts.SelectedItems != null)
+            {
+                var contact = lvContacts.SelectedValue as ContactEntity;
+                var createForm = new UpdateForm(contact, _jsonService);
+                createForm.Show();
+                this.Hide();
+            }
+      
         }
     }
 }
